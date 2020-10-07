@@ -28,6 +28,7 @@ public class Triangle {
     }
 
     private int uniqueSides() {
+
         int distinctIntegers = 0;
 
         for (int j = 0; j < sides.length; j++) {
