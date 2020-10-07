@@ -1,10 +1,12 @@
 public class Calculator {
 
-    public static int add(int a, int b){
+    public  int add(int a, int b){
         return a + b;
     }
 
-    public static double divide(double a, double b){
+    public  double divide(double a, double b){
+        if( b == 0.0)
+            throw new ArithmeticException();
         return a / b;
     }
 }
