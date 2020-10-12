@@ -1,11 +1,11 @@
 Unit testing training.
 
-RomanNumeral
+roman.RomanNumeral
     -Write unit test for the method convert
     -Try @ParameterizedTest for all the different characters
     -Can you identify any tests that the current code in convert can't handle?
 
-    -Create tests and code for a method that converts a decimal number into a RomanNumeral
+    -Create tests and code for a method that converts a decimal number into a roman.RomanNumeral
     public String convert(int number){}
 
 triangle/Triangle

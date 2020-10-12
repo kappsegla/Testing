@@ -1,8 +1,10 @@
+package calculator;
+
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CalculatorTest {
 
@@ -18,7 +20,7 @@ class CalculatorTest {
         //@DisplayName("Add method, two values as input returns sum of values.")
     void addWithTwoValuesReturnsSumOfValues() {
         //Arrange
-        //var calculator = new Calculator();
+        //var calculator = new calculator.Calculator();
         var a = 1;
         var b = 1;
         //Act
@@ -30,7 +32,7 @@ class CalculatorTest {
     @Test
     void divideValueAWithValueBReturnsQuotient() {
         var quotient = calculator.divide(10, 2);
-        assertEquals(5.0, quotient, "It looks like the division method on Calculator doesn't work as expected.");
+        assertEquals(5.0, quotient, "It looks like the division method on calculator.Calculator doesn't work as expected.");
     }
 
     @Test
