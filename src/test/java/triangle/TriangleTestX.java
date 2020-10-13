@@ -18,6 +18,7 @@ class TriangleTestX {
     }
 
     @Test
+    @Disabled
     void constructorThrowsExceptionForArgumentsWithValueZeroOrLess(){
 
         //Triangle triangle = new Triangle(0,-1,0);

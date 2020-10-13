@@ -15,16 +15,21 @@ public class Triangle {
 
     public Triangle(Point a, Point b, Point c) {
         sides = new double[3];
-        sides[0] = Math.sqrt(Math.pow((double) (b.x - a.x), 2.0) + Math.pow((double) (b.y - a.y), 2.0));
-        sides[1] = Math.sqrt(Math.pow((double) (b.x - c.x), 2.0) + Math.pow((double) (b.x - a.x), 2.0));
-        sides[2] = Math.sqrt(Math.pow((double) (c.x - a.x), 2.0) + Math.pow((double) (c.x - a.x), 2.0));
+        sides[0] = Math.sqrt(getPow(b.x, a.x) + getPow(b.y, a.y));
+        sides[1] = Math.sqrt(getPow(b.x, c.x) + getPow(b.y, c.y));
+        sides[2] = Math.sqrt(getPow(c.x, a.x) + getPow(c.y, a.y));
+    }
+
+    private double getPow(int x, int x2) {
+        return Math.pow((double) (x - x2), 2.0);
     }
 
     public Triangle(Point[] s) {
-        sides = new double[s.length];
-        sides[0] = Math.sqrt(Math.pow((double) (s[1].x - s[0].x), 2.0) + Math.pow((double) (s[1].y - s[0].y), 2.0));
-        sides[1] = Math.sqrt(Math.pow((double) (s[1].x - s[2].x), 2.0) + Math.pow((double) (s[1].x - s[2].x), 2.0));
-        sides[2] = Math.sqrt(Math.pow((double) (s[2].x - s[0].x), 2.0) + Math.pow((double) (s[2].x - s[0].x), 2.0));
+        this(s[0],s[1],s[2]);
+//        sides = new double[s.length];
+//        sides[0] = Math.sqrt(Math.pow((double) (s[1].x - s[0].x), 2.0) + Math.pow((double) (s[1].y - s[0].y), 2.0));
+//        sides[1] = Math.sqrt(Math.pow((double) (s[1].x - s[2].x), 2.0) + Math.pow((double) (s[1].y - s[2].y), 2.0));
+//        sides[2] = Math.sqrt(Math.pow((double) (s[2].x - s[0].x), 2.0) + Math.pow((double) (s[2].y - s[0].y), 2.0));
     }
 
     private int uniqueSides() {
@@ -47,25 +52,14 @@ public class Triangle {
     }
 
     public boolean isScalene() {
-        if (uniqueSides() == 1) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return uniqueSides() == 3;
     }
 
     public boolean isEquilateral() {
-        if (uniqueSides() == 3) {
-            return true;
-        }
-        return false;
+        return uniqueSides() == 1;
     }
 
     public boolean isIsosceles() {
-        if (uniqueSides() == 2) {
-            return true;
-        }
-        return false;
+        return uniqueSides() == 2;
     }
 }
