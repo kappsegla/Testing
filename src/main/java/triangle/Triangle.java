@@ -50,7 +50,9 @@ public class Triangle {
         if (uniqueSides() == 1) {
             return true;
         }
-        return false;
+        else {
+            return false;
+        }
     }
 
     public boolean isEquilateral() {
