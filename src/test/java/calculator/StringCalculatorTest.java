@@ -24,6 +24,10 @@ public class StringCalculatorTest {
         assertEquals(0, stringCalculator.add(null));
     }
 
+    @Test
+    public void stringWithTwoNumbersWithCommaSeparatorReturnsSumOfNumbers(){
+        assertEquals(3, stringCalculator.add("1,2"));
+    }
 
 
 
