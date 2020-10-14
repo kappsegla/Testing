@@ -3,6 +3,7 @@ package calculator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 public class StringCalculatorTest {
 
@@ -15,7 +16,9 @@ public class StringCalculatorTest {
 
     @Test
     public void stringWithOneNumberReturnsThatNumber() {
-        assertEquals(1, stringCalculator.add("1"));
+        //AssertJ fluent format for assertions.
+        assertThat(stringCalculator.add("1")).isEqualTo(1);
+        //assertEquals(1, stringCalculator.add("1"));
     }
 
     @Test
@@ -45,9 +48,13 @@ public class StringCalculatorTest {
 
     @Test
     public void negativeValuesThrowsException(){
-        Throwable exceptionThatWasThrown = assertThrows(IllegalArgumentException.class,
-                () -> stringCalculator.add("-1,2,-3,4,5") );
-        assertEquals("negatives not allowed,-1,-3", exceptionThatWasThrown.getMessage());
+        assertThatThrownBy(() -> stringCalculator.add("-1,2,-3,4,5") )
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("negatives not allowed,-1,-3");
+
+//        Throwable exceptionThatWasThrown = assertThrows(IllegalArgumentException.class,
+//                () -> stringCalculator.add("-1,2,-3,4,5") );
+//        assertEquals("negatives not allowed,-1,-3", exceptionThatWasThrown.getMessage());
     }
 
     @Test
