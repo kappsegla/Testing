@@ -13,4 +13,11 @@ public class StringCalculatorTest {
     {
         assertEquals(0, stringCalculator.add(""));
     }
+
+    @Test
+    public void stringWithOneNumberReturnsThatNumber(){
+        assertEquals(1,stringCalculator.add("1"));
+    }
+
+
 }
