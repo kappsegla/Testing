@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class StringCalculator {
+
+    public static final int MAX_VALUE = 1000;
+
     public int add(String numbers) {
         if (nullOrEmpty(numbers))
             return 0;
@@ -23,6 +26,7 @@ public class StringCalculator {
         return Arrays.stream(numbers
                 .split(String.valueOf(delimiter)))
                 .mapToInt(Integer::parseInt)
+                .filter(n -> n <= MAX_VALUE)
                 .sum();
     }
 
