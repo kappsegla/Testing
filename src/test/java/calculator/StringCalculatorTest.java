@@ -19,5 +19,10 @@ public class StringCalculatorTest {
         assertEquals(1,stringCalculator.add("1"));
     }
 
+    @Test
+    public void nullReferenceReturnsZeroWithoutCrashing(){
+        assertEquals(0, stringCalculator.add(null));
+    }
+
 
 }
