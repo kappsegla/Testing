@@ -5,10 +5,16 @@ import java.util.stream.Collectors;
 
 public class InvoiceFilter {
 
+    private final InvoicesDao invoicesDao;
+
+    public InvoiceFilter(InvoicesDao invoicesDao) {
+        this.invoicesDao = invoicesDao;
+    }
+
     public List<Invoice> filter() {
         //Must be modified to use dependency inversion
-        InvoiceDao invoiceDao = new InvoiceDao();
-        List<Invoice> allInvoices = invoiceDao.all();
+
+        List<Invoice> allInvoices = invoicesDao.all();
 
         return allInvoices.stream()
                 .filter(invoice -> invoice.getValue() < 100.0)

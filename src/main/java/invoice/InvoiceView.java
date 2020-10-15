@@ -9,12 +9,12 @@ public class InvoiceView {
 
     public void printInvoices()
     {
-        InvoiceDao invoiceDao = new InvoiceDao();
-        invoiceDao.save(new Invoice("Pelles gott",99.0));
-        invoiceDao.save(new Invoice("ICA Mini",50.0));
-        invoiceDao.save(new Invoice("Enegårdens kött",101.0));
+        InvoicesDao invoicesDao = new H2MemInvoicesDao();
+        invoicesDao.save(new Invoice("Pelles gott",99.0));
+        invoicesDao.save(new Invoice("ICA Mini",50.0));
+        invoicesDao.save(new Invoice("Enegårdens kött",101.0));
 
-        InvoiceFilter filter = new InvoiceFilter();
+        InvoiceFilter filter = new InvoiceFilter(invoicesDao);
         filter.filter().forEach(this::printInvoice);
     }
 

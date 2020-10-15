@@ -4,11 +4,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InvoiceDao {
+public class H2MemInvoicesDao implements InvoicesDao {
 
     private static Connection c;
 
-    public InvoiceDao() {
+    public H2MemInvoicesDao() {
         try {
             if(c!=null) return;
 
@@ -19,6 +19,7 @@ public class InvoiceDao {
         }
     }
 
+    @Override
     public List<Invoice> all() {
 
         List<Invoice> allInvoices = new ArrayList<>();
@@ -42,6 +43,7 @@ public class InvoiceDao {
 
     }
 
+    @Override
     public void save(Invoice inv) {
         try {
             PreparedStatement ps = c.prepareStatement("insert into invoice (name, value) values (?,?)");
@@ -56,6 +58,7 @@ public class InvoiceDao {
         }
     }
 
+    @Override
     public void close() {
         try {
             c.close();
