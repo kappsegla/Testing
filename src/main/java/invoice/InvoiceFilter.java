@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 public class InvoiceFilter {
 
     public List<Invoice> filter() {
-
         //Must be modified to use dependency inversion
         InvoiceDao invoiceDao = new InvoiceDao();
         List<Invoice> allInvoices = invoiceDao.all();

@@ -12,7 +12,7 @@ public class InvoiceDao {
         try {
             if(c!=null) return;
 
-            c = DriverManager.getConnection("jdbc:hsqldb:file:mymemdb.db", "SA", "");
+            c = DriverManager.getConnection("jdbc:h2:mem:mymemdb.db", "SA", "");
             c.prepareStatement("create table invoice (name varchar(100), value double)").execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);

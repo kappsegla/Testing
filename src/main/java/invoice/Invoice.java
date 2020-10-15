@@ -2,8 +2,8 @@ package invoice;
 
 public class Invoice {
 
-    private String customer;
-    private double value;
+    private final String customer;
+    private final double value;
 
     public Invoice(String customer, double value) {
         this.customer = customer;
