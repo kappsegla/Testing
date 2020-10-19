@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
-
+//https://blog.frankel.ch/refactoring-code-testability-example/
 @ExtendWith(MockitoExtension.class)
 public class CustomersReaderTest {
 
