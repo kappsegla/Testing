@@ -20,6 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.when;
+
 //https://blog.frankel.ch/refactoring-code-testability-example/
 @ExtendWith(MockitoExtension.class)
 public class CustomersReaderTest {
@@ -32,28 +33,26 @@ public class CustomersReaderTest {
     private HttpEntity entity;
     private CustomersReader customersReader;
 
+    @Mock
+    private ConfigurationService configurationService;
+
     @BeforeEach
     public void setUp() {
-        customersReader = new CustomersReader();
+        customersReader = new CustomersReader(configurationService, client);
     }
 
     @Test
     public void should_return_json() throws IOException {
 
-        try (var config = mockStatic(Configuration.class);
-             var httpclient = mockStatic(HttpClients.class)) {
+        when(configurationService.getCustomersUrl()).thenReturn("crap://test");
+        when(client.execute(any(HttpUriRequest.class))).thenReturn(response);
+        when(response.getEntity()).thenReturn(entity);
 
-            config.when(Configuration::getCustomersUrl).thenReturn("crap://test");
-            httpclient.when(HttpClients::createDefault).thenReturn(client);
-            when(client.execute(any(HttpUriRequest.class))).thenReturn(response);
-            when(response.getEntity()).thenReturn(entity);
+        InputStream stream = new ByteArrayInputStream("{ \"hello\" : \"world\" }".getBytes());
+        when(entity.getContent()).thenReturn(stream);
+        JSONObject json = customersReader.read();
 
-            InputStream stream = new ByteArrayInputStream("{ \"hello\" : \"world\" }".getBytes());
-            when(entity.getContent()).thenReturn(stream);
-            JSONObject json = customersReader.read();
-
-            assertThat(json.has("hello"));
-            assertThat(json.get("hello")).isEqualTo("world");
-        }// the static mocks is not visible outside the block above
+        assertThat(json.has("hello"));
+        assertThat(json.get("hello")).isEqualTo("world");
     }
 }

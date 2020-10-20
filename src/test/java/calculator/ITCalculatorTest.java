@@ -11,7 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @Tag("integration-test")
 class ITCalculatorTest {
     @Test
+    @Disabled
     void integrationTestExample() {
+
         throw new RuntimeException("This is an integration test.");
     }
 }
