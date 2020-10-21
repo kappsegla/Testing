@@ -50,7 +50,7 @@ public class TestKata2OptionalConditionalFetching {
          *  or return the defaultOptional (use a Supplier)
          *  Check API: java.util.Optional.or(?)
          */
-        Optional<String> nonNullOptional = Optional.empty();
+        Optional<String> nonNullOptional = anOptional.or(() -> defaultOptional);
 
         assertTrue(nonNullOptional instanceof Optional,
                 "The nonNullOptional should be an instance of Optional");
@@ -74,13 +74,13 @@ public class TestKata2OptionalConditionalFetching {
          *  and the need to use get()
          *  Check API: java.util.Optional.orElse(?)
          */
-        Integer nonNullInteger = nullableInteger.or(() -> Optional.of(11)).get();
+        Integer nonNullInteger = nullableInteger.orElse(11);
 
         assertTrue(nonNullInteger instanceof Integer,
                 "The nonNullInteger should be an instance of Integer");
 
-        assertEquals(nonNullInteger,
-                10,
+        assertEquals(11,
+                nonNullInteger,
                 "The nonNullInteger should not be empty");
     }
 
@@ -99,7 +99,7 @@ public class TestKata2OptionalConditionalFetching {
          *  and the need to use get()
          *  Check API: java.util.Optional.ofNullable(?)
          */
-        String nonNullString = null;
+        String nonNullString = anOptional.orElseGet(() -> defaultOptional);
 
         assertTrue(nonNullString instanceof String,
                 "The nonNullString should be an instance of String");
@@ -132,7 +132,7 @@ public class TestKata2OptionalConditionalFetching {
          *  Check API: java.util.Optional.orElseThrow()
          */
         assertThrows(NoSuchElementException.class, () -> {
-            String nonNullString = null;
+            String nonNullString = anOptional.orElseThrow();
         });
 
     }
@@ -157,7 +157,7 @@ public class TestKata2OptionalConditionalFetching {
         Exception caughtException = assertThrows(
                 RuntimeException.class,
                 () -> {
-                    String nonNullString = null;
+                    String nonNullString = anOptional.orElseThrow(exceptionSupplier);
 
                 });
 
@@ -185,7 +185,8 @@ public class TestKata2OptionalConditionalFetching {
          *  (depending on whether the optional has a value or not)
          *  Check API: java.util.Optional.ifPresentOrElse(?, ?)
          */
-//        nonEmptyIntegerOptional.???;
+
+        nonEmptyIntegerOptional.ifPresentOrElse(nonEmptyValueAction, alternateAction);
 
         assertEquals(10, nonEmptyValueCounter.get(), "");
 
@@ -197,7 +198,7 @@ public class TestKata2OptionalConditionalFetching {
          *  (depending on whether the optional has a value or not)
          *  Check API: java.util.Optional.ifPresentOrElse(?, ?)
          */
-//        emptyIntegerOptional.???
+        emptyIntegerOptional.ifPresentOrElse(nonEmptyValueAction, alternateAction);
 
         assertEquals(9, nonEmptyValueCounter.get(), "");
     }

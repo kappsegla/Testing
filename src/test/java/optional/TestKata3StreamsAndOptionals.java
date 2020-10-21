@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -126,10 +127,16 @@ public class TestKata3StreamsAndOptionals {
             }
         }
 
-        assertEquals(
-                expectedSetOfNameValuePairs,
-                actualNameValuePairs,
-                "The two collections should be the same");
+        expectedSetOfNameValuePairs = namesSet.stream()
+                .map(this::findOptionalNameValuePair)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toSet());
+
+                        assertEquals(
+                                expectedSetOfNameValuePairs,
+                                actualNameValuePairs,
+                                "The two collections should be the same");
     }
 
     @Test
@@ -152,6 +159,11 @@ public class TestKata3StreamsAndOptionals {
                 actualNameValuePairs.add(nameValuePair);
             }
         }
+
+        expectedSetOfNameValuePairs = namesSet.stream()
+                .map(this::findOptionalNameValuePair)
+                .flatMap( Optional::stream )
+                .collect(Collectors.toSet());
 
         assertEquals(
                 expectedSetOfNameValuePairs,
