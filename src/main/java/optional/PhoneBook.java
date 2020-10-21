@@ -12,7 +12,7 @@ public class PhoneBook {
         }
     };
 
-    private HashMap<String, String> phoneBookEntries = PHONE_NUMBERS;
+    private final HashMap<String, String> phoneBookEntries = PHONE_NUMBERS;
 
     PhoneBook() {
     }
